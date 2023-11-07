@@ -1,21 +1,21 @@
 import random
+from dataclasses import dataclass
 
 
+@dataclass
 class Creature:
-    def __init__(self, name, level):
-        self.name = name
-        self.level = level
+    name: str
+    level: int
 
     def defensive_roll(self):
         roll = random.randint(1, 12)
         return roll * self.level
 
 
+@dataclass
 class Dragon(Creature):
-    def __init__(self, name, level, scaliness, breaths_fire):
-        super().__init__(name, level)
-        self.scaliness = scaliness
-        self.breaths_fire = breaths_fire
+    scaliness: int
+    breaths_fire: bool
 
     def defensive_roll(self):
         roll = super().defensive_roll()
@@ -26,8 +26,8 @@ class Dragon(Creature):
         return value
 
 
+@dataclass
 class Wizard(Creature):
-
     def attack(self, creature):
         my_roll = self.defensive_roll()
         their_roll = creature.defensive_roll()
